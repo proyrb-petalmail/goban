@@ -18,6 +18,36 @@
 extern char gameboard_make(const int max_width, const int max_height);
 
 /**
+ * @brief get the address of the data.
+ * @return return the address if done successfully.
+ *         return 0 if done unsuccessfully.
+ * @version 1.0
+ * @date 2024/10/1
+ * @author ProYRB
+ */
+extern gameboard_data gameboard_get_data(void);
+
+/**
+ * @brief get the width of the gameboard.
+ * @return return the width if done successfully.
+ *         return 0 if done unsuccessfully.
+ * @version 1.0
+ * @date 2024/10/1
+ * @author ProYRB
+ */
+extern unsigned int gameboard_get_width(void);
+
+/**
+ * @brief get the width of the gameboard.
+ * @return return the width if done successfully.
+ *         return 0 if done unsuccessfully.
+ * @version 1.0
+ * @date 2024/10/1
+ * @author ProYRB
+ */
+extern unsigned int gameboard_get_height(void);
+
+/**
  * @brief recycle the current gameboard and free the memory.
  * @version 1.0
  * @date 2024/9/28
@@ -85,3 +115,26 @@ extern gameboard_unit_stone gameboard_get_stone_at_coord(const gameboard_unit_co
  * @author ProYRB
  */
 extern char gameboard_set_stone_at_coord(const gameboard_unit_stone stone, const gameboard_unit_coord *const coord);
+
+////////// unit //////////
+/**
+ * @brief get the coord of specific unit.
+ * @param unit the specific unit.
+ * @return return the address of coord if done successfully.
+ *         return 0 if unit is error.
+ * @version 1.0
+ * @date 2024/10/1
+ * @author ProYRB
+ */
+extern gameboard_unit_coord *gameboard_get_coord_of_unit(gameboard_unit *const unit);
+
+/**
+ * @brief get the stone of specific unit.
+ * @param unit the specific unit.
+ * @return return the address of stone if done successfully.
+ *         return 0 if unit is error.
+ * @version 1.0
+ * @date 2024/10/1
+ * @author ProYRB
+ */
+extern gameboard_unit_stone *gameboard_get_stone_of_unit(gameboard_unit *const unit);

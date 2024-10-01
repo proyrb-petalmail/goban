@@ -25,12 +25,20 @@ typedef enum gameboard_unit_stone
 typedef struct gameboard_unit_coord gameboard_unit_coord;
 
 /**
- * @brief the unit of gameboard.
+ * @brief the struct unit.
  * @version 1.0
- * @date 2024/9/28
+ * @date 2024/10/1
  * @author ProYRB
  */
 typedef struct gameboard_unit gameboard_unit;
+
+/**
+ * @brief the unit of gameboard.
+ * @version 1.0
+ * @date 2024/10/1
+ * @author ProYRB
+ */
+typedef gameboard_unit **gameboard_data;
 
 /**
  * @brief the gameboard struct.

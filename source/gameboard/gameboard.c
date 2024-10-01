@@ -6,7 +6,7 @@
 #include "gameboard_type.h"
 
 /**
- * @brief the coord of unit.
+ * @brief the coord of data.
  * @param x the x coord of point.
  * @param y the y coord.
  * @version 1.0
@@ -20,8 +20,8 @@ struct gameboard_unit_coord
 };
 
 /**
- * @brief the unit of gameboard.
- * @param coord the coord of unit.
+ * @brief the data of gameboard.
+ * @param coord the coord of data.
  * @param man the enum of man.
  * @version 1.0
  * @date 2024/9/28
@@ -44,7 +44,7 @@ struct gameboard_unit
  */
 struct gameboard
 {
-    gameboard_unit **unit;
+    gameboard_data data;
     unsigned int width;
     unsigned int height;
 };
@@ -56,7 +56,7 @@ static gameboard static_gameboard = {0, 0, 0};
 
 char gameboard_make(const int max_width, const int max_height)
 {
-    if (0 != static_gameboard.unit)
+    if (0 != static_gameboard.data)
     {
         Debug(Warn_Level, "have had a gameboard\n");
         return -1;
@@ -68,7 +68,7 @@ char gameboard_make(const int max_width, const int max_height)
         return -2;
     }
 
-    if (0 == (static_gameboard.unit = malloc(sizeof(gameboard_unit *) * max_height)))
+    if (0 == (static_gameboard.data = malloc(sizeof(gameboard_unit *) * max_height)))
     {
         Debug(Warn_Level, "have failed to malloc\n");
         return -3;
@@ -76,13 +76,13 @@ char gameboard_make(const int max_width, const int max_height)
 
     for (unsigned int at_height = 0; at_height < max_height; ++at_height)
     {
-        if (0 == (static_gameboard.unit[at_height] = malloc(sizeof(gameboard_unit) * max_width)))
+        if (0 == (static_gameboard.data[at_height] = malloc(sizeof(gameboard_unit) * max_width)))
             return -3;
         for (unsigned int at_width = 0; at_width < max_width; ++at_width)
         {
-            static_gameboard.unit[at_height][at_width].coord.x_of_width = at_width;
-            static_gameboard.unit[at_height][at_width].coord.y_of_height = at_height;
-            static_gameboard.unit[at_height][at_width].stone = Null;
+            static_gameboard.data[at_height][at_width].coord.x_of_width = at_width;
+            static_gameboard.data[at_height][at_width].coord.y_of_height = at_height;
+            static_gameboard.data[at_height][at_width].stone = Null;
         }
     }
 
@@ -93,11 +93,21 @@ char gameboard_make(const int max_width, const int max_height)
     return 0;
 }
 
+inline gameboard_data gameboard_get_data(void)
+{
+    if (0 == static_gameboard.data)
+        return 0;
+    return static_gameboard.data;
+}
+
+inline unsigned int gameboard_get_width(void) { return static_gameboard.width; }
+
+inline unsigned int gameboard_get_height(void) { return static_gameboard.height; }
+
 inline void gameboard_recycle(void)
 {
-    free(static_gameboard.unit);
-    static_gameboard.width = 0;
-    static_gameboard.height = 0;
+    free(static_gameboard.data);
+    static_gameboard.width = static_gameboard.height = 0;
     Debug(Notice_Level, "have recycled the gameboard\n");
 }
 
@@ -156,7 +166,7 @@ inline void gameboard_recycle_coord(gameboard_unit_coord *const coord)
 
 inline gameboard_unit_stone gameboard_get_stone_at_coord(const gameboard_unit_coord *const coord)
 {
-    return static_gameboard.unit[coord->y_of_height][coord->x_of_width].stone;
+    return static_gameboard.data[coord->y_of_height][coord->x_of_width].stone;
 }
 
 char gameboard_set_stone_at_coord(const gameboard_unit_stone stone, const gameboard_unit_coord *const coord)
@@ -168,12 +178,12 @@ char gameboard_set_stone_at_coord(const gameboard_unit_stone stone, const gamebo
     {
     case Null:
     {
-        static_gameboard.unit[coord->y_of_height][coord->x_of_width].stone = stone;
+        static_gameboard.data[coord->y_of_height][coord->x_of_width].stone = stone;
         break;
     }
     default:
     {
-        if (stone_of_coord == static_gameboard.unit[coord->y_of_height][coord->x_of_width].stone)
+        if (stone_of_coord == static_gameboard.data[coord->y_of_height][coord->x_of_width].stone)
             return_value = -1;
         else
             return_value = -2;
@@ -183,4 +193,18 @@ char gameboard_set_stone_at_coord(const gameboard_unit_stone stone, const gamebo
 
     Debug(Message_Level, "have set the stone\n");
     return return_value;
+}
+
+inline gameboard_unit_coord *gameboard_get_coord_of_unit(gameboard_unit *const data)
+{
+    if (0 == data)
+        return 0;
+    return &(data->coord);
+}
+
+inline gameboard_unit_stone *gameboard_get_stone_of_unit(gameboard_unit *const data)
+{
+    if (0 == data)
+        return 0;
+    return &(data->stone);
 }

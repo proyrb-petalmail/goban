@@ -6,4 +6,5 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(gameboard)
 include(printer)
+include(checker)
 include(test)

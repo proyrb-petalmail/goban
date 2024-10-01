@@ -1,7 +1,7 @@
 # Goban
 
 > - @brief a game based on console.
-> - @version **v0.2**
+> - @version **v0.3**
 > - @date **2024/9/28**
 > - @author **ProYRB**
 
