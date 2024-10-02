@@ -153,7 +153,7 @@ char gameboard_set_coord(gameboard_unit_coord *const coord, const int y_of_heigh
     {
         coord->y_of_height = y_of_height;
         coord->x_of_width = x_of_width;
-        Debug(Message_Level, "have set the coord\n");
+        // Debug(Message_Level, "have set the coord\n");
         return 0;
     }
 }
@@ -174,22 +174,23 @@ char gameboard_set_stone_at_coord(const gameboard_unit_stone stone, const gamebo
     char return_value = 0;
     gameboard_unit_stone stone_of_coord;
 
-    switch (stone_of_coord = gameboard_get_stone_at_coord(coord))
-    {
-    case Null:
-    {
-        static_gameboard.data[coord->y_of_height][coord->x_of_width].stone = stone;
-        break;
-    }
-    default:
-    {
-        if (stone_of_coord == static_gameboard.data[coord->y_of_height][coord->x_of_width].stone)
-            return_value = -1;
-        else
-            return_value = -2;
-        break;
-    }
-    }
+    static_gameboard.data[coord->y_of_height][coord->x_of_width].stone = stone;
+    // switch (stone_of_coord = gameboard_get_stone_at_coord(coord))
+    // {
+    // case Null:
+    // {
+    //     static_gameboard.data[coord->y_of_height][coord->x_of_width].stone = stone;
+    //     break;
+    // }
+    // default:
+    // {
+    //     if (stone_of_coord == stone)
+    //         return_value = -1;
+    //     else
+    //         return_value = -2;
+    //     break;
+    // }
+    // }
 
     Debug(Message_Level, "have set the stone\n");
     return return_value;

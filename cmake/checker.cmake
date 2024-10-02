@@ -18,5 +18,6 @@ target_include_directories(
     checker
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/debug
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/gameboard
     ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}
 )
