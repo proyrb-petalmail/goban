@@ -3,52 +3,41 @@
 #include "gameboard_type.h"
 
 ////////// gameboard //////////
-/**
- * @brief make a new gameboard in specific size.
- * @param max_width the max limit of width of the new gameboard, that means the value of width range [0, max_width - 1];
- * @param max_height the max limit of height of the new gameboard, that means the value of height range [0, max_height - 1];
- * @return return 0 if done successfully.
- *         return -1 if the chessboard has been initialized.
- *         return -2 if the size is out of range.
- *         return -3 if malloc failed.
- * @version 1.0
- * @date 2024/9/28
- * @author ProYRB
- */
-extern char gameboard_make(const int max_width, const int max_height);
 
 /**
- * @brief get the address of the data.
- * @return return the address if done successfully.
- *         return 0 if done unsuccessfully.
- * @version 1.0
- * @date 2024/10/1
+ * @brief generate a rectangular gameboard of specified size and initialize it as an empty gameboard.
+ * @param width the width of the gameboard.
+ * @param height the height of the gameboard.
+ * @return return 0 if done successfully.
+ *         return -1 if the gameboard has been initialized.
+ *         Return -2 if the size exceedes the limit.
+ *         return -3 if malloc failed.
+ * @version 2.0
+ * @date 2024/10/2
  * @author ProYRB
  */
-extern gameboard_data gameboard_get_data(void);
+extern char gameboard_initialize(const int width, const int height);
 
 /**
  * @brief get the width of the gameboard.
  * @return return the width if done successfully.
- *         return 0 if done unsuccessfully.
- * @version 1.0
- * @date 2024/10/1
+ * @version 2.0
+ * @date 2024/10/2
  * @author ProYRB
  */
 extern unsigned int gameboard_get_width(void);
 
 /**
  * @brief get the width of the gameboard.
- * @return return the width if done successfully.
- *         return 0 if done unsuccessfully.
- * @version 1.0
- * @date 2024/10/1
+ * @return return the height if done successfully.
+ * @version 2.0
+ * @date 2024/10/2
  * @author ProYRB
  */
 extern unsigned int gameboard_get_height(void);
 
 /**
- * @brief recycle the current gameboard and free the memory.
+ * @brief recycle the gameboard.
  * @version 1.0
  * @date 2024/9/28
  * @author ProYRB
@@ -56,85 +45,65 @@ extern unsigned int gameboard_get_height(void);
 extern void gameboard_recycle(void);
 
 ////////// coord //////////
-/**
- * @brief get a specific coord.
- * @param y_of_height the y coord on height.
- * @param x_of_width the x coord on width.
- * @return return the address of coord at specific value.
- *         return 0 if done unsuccessfully.
- * @version 1.0
- * @date 2024/9/28
- * @author ProYRB
- */
-extern gameboard_unit_coord *const gameboard_get_coord(const int y_of_height, const int x_of_width);
 
 /**
- * @brief set the coord to be a specific value.
- * @param coord the coord to be modified.
- * @param y_of_height the y coord on height.
- * @param x_of_width the x coord on width.
- * @return return 0 if done successfully.
- *         return -1 if the y is out of height range [0, max_height - 1].
- *         return -2 if the x is out of width range [0, max_width - 1].
- *         return -3 if the y and x are out of range.
+ * @brief set x coord.
+ * @param x the x coord on width.
+ * @return return 0 if done unsuccessfully.
+ *         return -1 if the value exceedes the limit.
  * @version 1.0
- * @date 2024/9/28
+ * @date 2024/10/2
  * @author ProYRB
  */
-extern char gameboard_set_coord(gameboard_unit_coord *const coord, const int y_of_height, const int x_of_width);
+extern char coord_set_x(const int x);
 
 /**
- * @brief recycle the coord.
+ * @brief set y coord.
+ * @param y the y coord on height.
+ * @return return 0 if done unsuccessfully.
+ *         return -1 if the value exceedes the limit.
  * @version 1.0
- * @date 2024/9/28
+ * @date 2024/10/2
  * @author ProYRB
  */
-extern void gameboard_recycle_coord(gameboard_unit_coord *const coord);
+extern char coord_set_y(const int y);
+
+/**
+ * @brief get x coord.
+ * @return return x of the coord.
+ * @version 1.0
+ * @date 2024/10/2
+ * @author ProYRB
+ */
+extern unsigned int coord_get_x(void);
+
+/**
+ * @brief get y coord.
+ * @return return y of the coord.
+ * @version 1.0
+ * @date 2024/10/2
+ * @author ProYRB
+ */
+extern unsigned int coord_get_y(void);
 
 ////////// stone //////////
-/**
- * @brief get the enum of stone at specific coord.
- * @param coord the coord of unit.
- * @return return the enum value if done successfully.
- *         return -1 if the coord is out of range.
- * @version 1.0
- * @date 2024/9/28
- * @author ProYRB
- */
-extern gameboard_unit_stone gameboard_get_stone_at_coord(const gameboard_unit_coord *const coord);
 
 /**
- * @brief set the enum of stone at specific coord.
- * @param coord the coord of unit.
- * @param stone the enum you want to be set.
+ * @brief set the stone at current coord.
+ * @param new_stone the type of stone.
  * @return return 0 if done successfully.
- *         return -1 if the unit has the same stone.
- *         return -2 if the unit has the another stone.
+ *         return -1 if the new_stone exceedes the limit.
  * @version 1.0
- * @date 2024/9/28
+ * @date 2024/10/2
  * @author ProYRB
  */
-extern char gameboard_set_stone_at_coord(const gameboard_unit_stone stone, const gameboard_unit_coord *const coord);
-
-////////// unit //////////
-/**
- * @brief get the coord of specific unit.
- * @param unit the specific unit.
- * @return return the address of coord if done successfully.
- *         return 0 if unit is error.
- * @version 1.0
- * @date 2024/10/1
- * @author ProYRB
- */
-extern gameboard_unit_coord *gameboard_get_coord_of_unit(gameboard_unit *const unit);
+extern char stone_set(const stone new_stone);
 
 /**
- * @brief get the stone of specific unit.
- * @param unit the specific unit.
- * @return return the address of stone if done successfully.
- *         return 0 if unit is error.
+ * @brief get the stone.
+ * @return return the enum value if done successfully.
  * @version 1.0
- * @date 2024/10/1
+ * @date 2024/10/2
  * @author ProYRB
  */
-extern gameboard_unit_stone *gameboard_get_stone_of_unit(gameboard_unit *const unit);
+extern stone stone_get(void);
