@@ -138,7 +138,7 @@ char stone_set(const stone new_stone)
         return -1;
     stone *const base = &(static_gameboard.unit_pointer[coord_get_y()][coord_get_x()].stone);
     Debug((Null == *base) ? Message_Level : Warn_Level, "set [%s] stone at (%d, %d)\n",
-          (Null == *base) ? "Null" : ((White == *base) ? "White" : "Balck"), coord_get_x(), coord_get_y());
+          (Null == new_stone) ? "Null" : ((White == new_stone) ? "White" : "Balck"), coord_get_x(), coord_get_y());
     *base = new_stone;
     return 0;
 }

@@ -5,12 +5,9 @@
 
 void print_gameboard(void)
 {
-    Debug(Message_Level, "width:%d \theight:%d\n", gameboard_get_width(), gameboard_get_height());
     static char template[TEMPLATE_LENGTH];
     const unsigned int width = gameboard_get_width();
     const unsigned int height = gameboard_get_height();
-    gameboard_unit_coord *const coord = gameboard_get_coord(0, 0);
-    char result = 0;
 
     printf(" ┌─");
     for (unsigned char index_x = 0; index_x < width; ++index_x)
@@ -25,81 +22,62 @@ void print_gameboard(void)
         {
             printf("   ");
             for (unsigned char index_x = 0; index_x < width; ++index_x)
-            {
                 printf("|   ");
-            }
             printf("\n");
         }
         else
         {
             memset(template, '\0', TEMPLATE_LENGTH);
             printf("%2d ", index_y / 2);
+            coord_set_y(index_y / 2);
             if (0 == index_y)
             {
                 for (unsigned char index_x = 0; index_x < width; ++index_x)
                 {
-                    result = gameboard_set_coord(coord, index_y / 2, index_x);
+                    coord_set_x(index_x);
                     if (0 == index_x)
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, "● ─");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, "○ ─");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "┌──");
-                        }
-                        break;
+                            break;
                         }
                     }
                     else if ((width - 1) == index_x)
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, " ●");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, " ○");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "─┐");
-                        }
-                        break;
+                            break;
                         }
                     }
                     else
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, " ● ─");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, " ○ ─");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "─┬──");
-                        }
-                        break;
+                            break;
                         }
                     }
                 }
@@ -109,68 +87,50 @@ void print_gameboard(void)
             {
                 for (unsigned char index_x = 0; index_x < width; ++index_x)
                 {
-                    result = gameboard_set_coord(coord, index_y / 2, index_x);
+                    coord_set_x(index_x);
                     if (0 == index_x)
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, "● ─");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, "○ ─");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "└──");
-                        }
-                        break;
+                            break;
                         }
                     }
                     else if ((width - 1) == index_x)
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, " ●");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, " ○");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "─┘");
-                        }
-                        break;
+                            break;
                         }
                     }
                     else
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, " ● ─");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, " ○ ─");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "─┴──");
-                        }
-                        break;
+                            break;
                         }
                     }
                 }
@@ -180,68 +140,50 @@ void print_gameboard(void)
             {
                 for (unsigned char index_x = 0; index_x < width; ++index_x)
                 {
-                    result = gameboard_set_coord(coord, index_y / 2, index_x);
+                    coord_set_x(index_x);
                     if (0 == index_x)
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, "● ─");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, "○ ─");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "├──");
-                        }
-                        break;
+                            break;
                         }
                     }
                     else if ((width - 1) == index_x)
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, " ●");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, " ○");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "─┤");
-                        }
-                        break;
+                            break;
                         }
                     }
                     else
                     {
-                        switch (gameboard_get_stone_at_coord(coord))
+                        switch (stone_get())
                         {
                         case White:
-                        {
                             strcat(template, " ● ─");
-                        }
-                        break;
+                            break;
                         case Black:
-                        {
                             strcat(template, " ○ ─");
-                        }
-                        break;
+                            break;
                         default:
-                        {
                             strcat(template, "─┼──");
-                        }
-                        break;
+                            break;
                         }
                     }
                 }
@@ -251,6 +193,5 @@ void print_gameboard(void)
         }
     }
     printf(" y\n");
-
-    gameboard_recycle_coord(coord);
+    Debug(Notice_Level, "have printed gameboard\n");
 }
