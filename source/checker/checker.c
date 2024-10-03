@@ -2,60 +2,131 @@
 #include "debug.h"
 #include "gameboard.h"
 
-char checker_determine(gameboard_unit_coord *const coord)
+char checker_gameboard(const int x, const int y)
 {
-    const gameboard_unit_stone base_stone = gameboard_get_stone_at_coord(coord);
+    char return_value = 0;
+    if (coord_set_x(x))
+    {
+        Debug(Warn_Level, "the x exceedes the limit\n");
+        return_value |= (1 << 0);
+    }
+    if (coord_set_y(y))
+    {
+        Debug(Warn_Level, "the y exceedes the limit\n");
+        return_value |= (1 << 1);
+    }
+    if (return_value)
+        return return_value;
+
+    const stone base_stone = stone_get();
 
     if (Null == base_stone)
-        return -1;
+        return return_value = -4;
+
+    int count = 1;
 
     /* '\' */
-    int count = 1;
-    gameboard_unit_coord *const new_coord = gameboard_get_coord(0, 0);
-    // 0 = gameboard_set_coord( coord, , x_of_width)
     for (unsigned char index = 1; index < 5; ++index)
     {
-        if (gameboard_get_stone_at_coord(new_coord) == base_stone)
-            ++count;
-        else
-            break;
-    }
-    for (unsigned char index = 1; index < 5; ++index)
-    {
-        if (5 == count)
-        {
-            gameboard_recycle_coord(coord);
-            return 0;
-        }
-        if (gameboard_get_stone_at_coord(new_coord) == base_stone)
-            ++count;
-        else
-            break;
-    }
+        if (coord_set_x(x - index) || coord_set_y(y - index))
+            continue;
 
-    gameboard_recycle_coord(coord);
-    return -2;
+        if (stone_get() == base_stone)
+            ++count;
+        else
+            break;
+    }
+    for (unsigned char index = 1; index < 5; ++index)
+    {
+        if (coord_set_x(x + index) || coord_set_y(y + index))
+            continue;
+
+        if (stone_get() == base_stone)
+            ++count;
+        else
+            break;
+    }
+    if (count > 4)
+        return 0;
+    else
+        count = 1;
 
     /* '/' */
     for (unsigned char index = 1; index < 5; ++index)
     {
-        if (gameboard_get_stone_at_coord(new_coord) == base_stone)
-        {
+        if (coord_set_x(x - index) || coord_set_y(y + index))
+            continue;
+
+        if (stone_get() == base_stone)
             ++count;
-        }
         else
             break;
     }
     for (unsigned char index = 1; index < 5; ++index)
     {
-        gameboard_unit_coord *const new_coord = {coord->y_of_height + index, coord->x_of_width - index};
-        if (gameboard_get_stone_at_coord(new_coord) == base_stone)
+        if (coord_set_x(x + index) || coord_set_y(y - index))
+            continue;
+        if (stone_get() == base_stone)
             ++count;
         else
             break;
-        if (count > 4)
-            return 0;
     }
-    gameboard_recycle_coord(coord);
-    return -2;
+    if (count > 4)
+        return 0;
+    else
+        count = 1;
+
+    /* '-' */
+    coord_set_y(y);
+    for (unsigned char index = 1; index < 5; ++index)
+    {
+        if (coord_set_x(x - index))
+            continue;
+
+        if (stone_get() == base_stone)
+            ++count;
+        else
+            break;
+    }
+    for (unsigned char index = 1; index < 5; ++index)
+    {
+        if (coord_set_x(x + index))
+            continue;
+        if (stone_get() == base_stone)
+            ++count;
+        else
+            break;
+    }
+    if (count > 4)
+        return 0;
+    else
+        count = 1;
+
+    /* '|' */
+    coord_set_x(x);
+    for (unsigned char index = 1; index < 5; ++index)
+    {
+        if (coord_set_y(y + index))
+            continue;
+
+        if (stone_get() == base_stone)
+            ++count;
+        else
+            break;
+    }
+    for (unsigned char index = 1; index < 5; ++index)
+    {
+        if (coord_set_y(y - index))
+            continue;
+        if (stone_get() == base_stone)
+            ++count;
+        else
+            break;
+    }
+    if (count > 4)
+        return 0;
+    else
+        count = 1;
+
+    return -5;
 }

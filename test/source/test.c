@@ -1,5 +1,5 @@
 #include "test.h"
-// #include "checker.h"
+#include "checker.h"
 #include "debug.h"
 #include "gameboard.h"
 #include "printer.h"
@@ -12,8 +12,8 @@ int main(void)
     print_gameboard();
 
     coord_set_x(0);
-    coord_set_y(0);
-    stone_set(White);
+    coord_set_y(1);
+    stone_set(Black);
     Debug(Notice_Level, "stone: %d at (%d, %d)\n", stone_get(), coord_get_x(), coord_get_y());
     print_gameboard();
 
@@ -24,22 +24,24 @@ int main(void)
     print_gameboard();
 
     coord_set_x(2);
-    coord_set_y(2);
-    stone_set(White);
+    coord_set_y(1);
+    stone_set(Black);
     Debug(Notice_Level, "stone: %d at (%d, %d)\n", stone_get(), coord_get_x(), coord_get_y());
     print_gameboard();
 
     coord_set_x(3);
-    coord_set_y(3);
+    coord_set_y(1);
     stone_set(Black);
     Debug(Notice_Level, "stone: %d at (%d, %d)\n", stone_get(), coord_get_x(), coord_get_y());
     print_gameboard();
 
     coord_set_x(4);
-    coord_set_y(4);
-    stone_set(White);
+    coord_set_y(1);
+    stone_set(Black);
     Debug(Notice_Level, "stone: %d at (%d, %d)\n", stone_get(), coord_get_x(), coord_get_y());
     print_gameboard();
+
+    Debug(Warn_Level, "result: %d\n", checker_gameboard(3, 1));
 
     gameboard_recycle();
 
