@@ -16,4 +16,4 @@ add_executable(test ${test_source})
 
 target_link_libraries(test PUBLIC gameboard)
 target_link_libraries(test PUBLIC printer)
-# target_link_libraries(test PUBLIC checker)
+target_link_libraries(test PUBLIC checker)

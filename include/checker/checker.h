@@ -5,10 +5,14 @@
 /**
  * @brief Check if the game has been won.
  * @param unit the coord of unit.
- * @return return 0 if Achieving Victory
- *         return -1 if Invalid piece
- * @version 1.0
+ * @return return 0 if done successfully.
+ *         return -1 if the x exceedes the limit.
+ *         return -2 if the y exceedes the limit.
+ *         return -3 if the x and y exceedes the limit.
+ *         return -4 if the specific stone is null.
+ *         return -5 if not win.
+ * @version 2.0
  * @date 2024/10/1
  * @author SCR
  */
-char checker_determine(gameboard_unit_coord *const coord);
+char checker_gameboard(const int x, const int y);
