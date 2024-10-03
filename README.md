@@ -1,8 +1,7 @@
 # Goban
 
 > - @brief a game based on console.
-> - @version **v0.3**
-> - @date **2024/9/28**
+> - @version **v1.1**
 > - @author **ProYRB**
 
 ## Build and Run
@@ -20,6 +19,8 @@ cd build
 ./clean.sh
 ```
 
-## About CMake
+## Module
 
-> auto to build libgameboard.so
+> 1. libgameboard.so
+> 2. libprinter.so
+> 3. libchecker.so

@@ -1,9 +1,5 @@
 #pragma once
 
-/**
- * @brief Usage:
- */
-
 #include <stdio.h>
 #include <string.h>
 
@@ -18,8 +14,6 @@
  * @brief output debug on specific level.
  * @param level the level of log. range: { Error_Level, Warn_Level, Notice_Level, Message_Level }.
  * @param ... what you want to output.
- * @version 1.0
- * @date 2024/9/28
  * @author ProYRB
  */
 #define Debug(level, ...)                                                                                                      \

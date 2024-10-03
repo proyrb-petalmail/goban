@@ -12,8 +12,6 @@
  * @brief the coord of unit.
  * @param x the x coord.
  * @param y the y coord.
- * @version 2.0
- * @date 2024/10/2
  * @author ProYRB
  */
 typedef struct coord
@@ -26,8 +24,6 @@ typedef struct coord
  * @brief the unit of gameboard.
  * @param coord the coord.
  * @param stone the stone.
- * @version 2.0
- * @date 2024/10/2
  * @author ProYRB
  */
 typedef struct unit
@@ -41,8 +37,6 @@ typedef struct unit
  * @param unit_pointer the address of the gameboard.
  * @param width the width of the gameboard.
  * @param height the height of the gameboard.
- * @version 2.0
- * @date 2024/10/2
  * @author ProYRB
  */
 typedef struct gameboard

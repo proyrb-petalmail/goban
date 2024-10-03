@@ -11,8 +11,6 @@
  *         return -3 if the x and y exceedes the limit.
  *         return -4 if the specific stone is null.
  *         return -5 if not win.
- * @version 2.0
- * @date 2024/10/1
  * @author SCR
  */
 char checker_gameboard(const int x, const int y);
